@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Change to the Docker directory and build the Docker image
-                    sh 'cd /var/lib/jenkins/workspace/inventory/src/main/docker/ && docker build -t 10.120.2.228:5000/tomcat:v1 .'
+                    sh 'cd /opt/project/code-with-quarkus/src/main/docker/ && docker build --no-cache --rm --squash -t 192.168.3.91:5000/inventory:v1.0.0 .'
                 }
             }
         }
