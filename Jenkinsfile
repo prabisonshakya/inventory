@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Change to the Docker directory and build the Docker image
-                    sh 'cd /opt/project/code-with-quarkus/src/main/docker/ && docker build --no-cache --rm -t 192.168.3.91:5000/inventory:v1.0.0 .'
+                    sh 'cd /opt/project/code-with-quarkus/src/main/docker/ && docker build --no-cache --rm -t 192.168.3.91:5000/inventory:v1.0.0 -f Dockerfile.legacy-jar .'
                 }
             }
         }
