@@ -29,11 +29,38 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Change to the Docker directory and build the Docker image
+                    sh 'cd /opt/project/code-with-quarkus/src/main/docker/ && docker build --no-cache --rm -t 192.168.3.91:5000/inventory:v1.0.0 -f Dockerfile.legacy-jar .'
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push the Docker image to the registry
+                    sh 'docker push 10.120.2.228:5000/tomcat:v1'
+                }
+            }
+        }
+
+        stage('Pull Docker Image on Test Server') {
+            steps {
+                script {
+                    // SSH into the test server and pull the Docker image
+                    sh 'ssh jenkins "docker pull 10.120.2.228:5000/tomcat:v1"'
+                }
+            }
+        }
+
         stage('Execute Pre-query in MySQL') {
             steps {
                 script {
                     // SSH into the test server and execute pre-query
-                    sh 'ssh jenkins "wget https://github.com/prabisonshakya/inventory/tree/master/resources/prequery.sql && mysql -uroot -proot < prequery.sql"'
+                    sh 'ssh jenkins "wget https://raw.githubusercontent.com/prabisonshakya/docker-jenkins/main/resources/prequery.sql && mysql -uroot -proot < prequery.sql"'
                 }
             }
         }
