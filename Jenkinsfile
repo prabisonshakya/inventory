@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Maven clean install
-                    sh 'mvn clean package'
+                    sh '/opt/apache-maven-3.9.9/bin/mvn clean package'
                 }
             }
         }
