@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Maven clean install
-                    sh '${mvn}/bin/mvn clean package'
+                    sh 'mvn clean package'
                 }
             }
         }
