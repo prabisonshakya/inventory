@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and execute pre-query
-                    sh 'ssh jenkins "wget https://github.com/prabisonshakya/inventory/blob/master/resources/postquery.sql && mysql -uroot -proot < prequery.sql"'
+                    sh 'ssh jenkins "wget https://raw.githubusercontent.com/prabisonshakya/inventory/refs/heads/master/resources/prequery.sql && mysql -uroot -proot < prequery.sql"'
                 }
             }
         }
